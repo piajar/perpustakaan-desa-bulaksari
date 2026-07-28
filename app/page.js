@@ -21,7 +21,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark text-emerald-300 text-xs font-semibold mb-8 uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Pusat Literasi Warga
+              Pusat Literasi Anak
             </span>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">
@@ -32,7 +32,7 @@ export default function Home() {
             </h1>
             
             <p className="text-emerald-100/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              Temukan ribuan koleksi buku menarik. Dari buku pelajaran, novel, hingga panduan pertanian modern untuk kesejahteraan warga desa.
+              Temukan ratusan koleksi buku menarik. Dari buku pelajaran, novel, hingga panduan pertanian modern untuk kesejahteraan warga desa.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
@@ -47,10 +47,10 @@ export default function Home() {
             {/* Floating Stats */}
             <div className="mt-16 lg:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
               {[
-                { label: "Koleksi Buku", value: "2,500+" },
-                { label: "Anggota Aktif", value: "450+" },
-                { label: "Kunjungan/Bulan", value: "1,200" },
-                { label: "E-Books", value: "300+" }
+                { label: "Koleksi Buku", value: "1,300+" },
+                { label: "Anggota Aktif", value: "50+" },
+                { label: "Kunjungan/Bulan", value: "400+" },
+                { label: "E-Books", value: "-" }
               ].map((stat, i) => (
                 <div key={i} className="glass-dark rounded-2xl p-4 transform hover:-translate-y-1 transition-transform">
                   <div className="text-2xl md:text-3xl font-black text-white mb-1">{stat.value}</div>
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-sm font-medium">
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <span>Senin–Sabtu, 08.00–16.00 WIB</span>
+              <span>Senin – Jumat, 14.00–16.00 WIB</span>
             </div>
             <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
             <div className="flex items-center gap-2">
@@ -89,17 +89,17 @@ export default function Home() {
               {[
                 { 
                   title: "Peminjaman Buku", 
-                  desc: "Akses ribuan buku fisik yang bisa dipinjam secara gratis oleh seluruh warga desa yang terdaftar.",
+                  desc: "Akses ratusan buku fisik yang bisa dipinjam secara gratis oleh seluruh warga desa.",
                   icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                 },
                 { 
                   title: "Ruang Baca Nyaman", 
-                  desc: "Fasilitas ruang baca ber-AC, tempat duduk yang nyaman, dan akses WiFi gratis untuk belajar.",
+                  desc: "Tempat duduk yang nyaman",
                   icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                 },
                 { 
                   title: "Kegiatan Literasi", 
-                  desc: "Berbagai program rutin seperti mendongeng untuk anak, bedah buku, dan pelatihan keterampilan warga.",
+                  desc: "Berbagai program rutin seperti mendongeng untuk anak, bedah buku, dan pelatihan keterampilan.",
                   icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                 }
               ].map((service, i) => (
@@ -157,7 +157,7 @@ export default function Home() {
                 <ul className="space-y-4 mb-8">
                   {[
                     "Koleksi buku ter-update",
-                    "Sistem peminjaman digital",
+                    "Sistem peminjaman buku",
                     "Program literasi berkelanjutan"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-emerald-50 font-medium">
