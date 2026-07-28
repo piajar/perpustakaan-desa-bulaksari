@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+  }
+  .glass-dark {
+    @apply bg-emerald-950/80 backdrop-blur-lg border border-emerald-800/30 shadow-[0_4px_30px_rgba(0,0,0,0.3)];
+  }
+}
+
+body {
+  /* Smooth scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-emerald-500) transparent;
+}
