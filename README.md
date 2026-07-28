@@ -1,100 +1,143 @@
 <div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=Perpustakaan%20Desa%20Bulaksari&fontSize=50&animation=fadeIn&fontAlignY=35" alt="Header Perpustakaan" width="100%" />
 
-  <!-- Logo Banner Perpustakaan -->
-  <img src="https://unsplash.com" width="100%" height="250" alt="Banner Perpustakaan Desa" style="border-radius: 12px; object-fit: cover; margin-bottom: 20px;" />
+  # 📚 Sistem Informasi Perpustakaan Desa Bulaksari
 
-  # 📚 Perpustakaan Desa Bulaksari
-  
-  ### *Membangun Literasi Warga Melalui Jendela Digital yang Modern*
-  
-  [Pratinjau Situs](https://vercel.app) · [Laporkan Bug](https://github.com) · [Ajukan Fitur](https://github.com)
+  *Membangun Literasi, Memajukan Desa.*
 
-  <!-- Badges untuk Teknologi -->
-  <img src="https://shields.io" alt="Next.js" />
-  <img src="https://shields.io" alt="Tailwind CSS" />
-  <img src="https://shields.io" alt="JavaScript" />
-  <img src="https://shields.io" alt="Vercel" />
-
+  [![Status](https://img.shields.io/badge/Status-Dalam_Pengembangan-success.svg?style=for-the-badge)]()
+  [![License](https://img.shields.io/badge/Lisensi-MIT-blue.svg?style=for-the-badge)]()
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)]()
 </div>
 
 ---
 
-## 📌 Tentang Proyek Ini
-Platform **Perpustakaan Desa Bulaksari** adalah sistem informasi berbasis web masa kini yang dirancang khusus untuk mempermudah manajemen sirkulasi buku, pencarian katalog, dan penyediaan ruang baca digital terpadu bagi seluruh elemen masyarakat Desa Bulaksari.
+## 📖 Tentang Proyek
 
-### 🌟 Fitur Utama (Peta Jalan)
-- [x] **Antarmuka Responsif** — Nyaman diakses lewat HP, tablet, maupun komputer.
-- [x] **Laman Pemeliharaan Sistem** — Mode khusus untuk penataan backend tanpa merusak frontend.
-- [ ] **Katalog Buku Pintar** — Pencarian buku kilat berdasarkan judul, penulis, atau nomor rak.
-- [ ] **E-Katalog Mandiri** — Baca cuplikan ringkasan buku secara daring dari rumah.
-- [ ] **Kartu Anggota Digital** — QR-Code khusus untuk sistem absensi kunjungan warga.
+Sistem Informasi **Perpustakaan Desa Bulaksari** adalah platform digital berbasis web yang dirancang khusus untuk mempermudah tata kelola perpustakaan di tingkat desa. Dengan antarmuka yang ramah pengguna, sistem ini membantu pustakawan dalam mendata buku, mengelola anggota, serta melacak transaksi sirkulasi (peminjaman dan pengembalian) secara efisien dan transparan.
 
 ---
 
-## 🛠️ Arsitektur Teknologi
-Sistem ini dibangun di atas kombinasi teknologi modern demi kecepatan performa yang optimal:
-- **Framework Utama:** [Next.js](https://nextjs.org) (Sistem Router Berbasis App)
-- **Desain & Gaya:** [Tailwind CSS](https://tailwindcss.com) (Pendekatan Utilitas Komponen)
-- **Serverless Hosting:** [Vercel](https://vercel.com) (Integrasi CI/CD Instan dari GitHub)
+## ✨ Fitur Unggulan
+
+- 📊 **Dasbor Interaktif**: Ringkasan real-time jumlah buku, anggota aktif, dan grafik peminjaman bulanan.
+- 📚 **Katalog Pintar**: Pencarian buku tingkat lanjut berdasarkan judul, pengarang, kategori, atau ISBN.
+- 👥 **Manajemen Keanggotaan**: Pendaftaran warga desa sebagai anggota, lengkap dengan fitur cetak kartu perpustakaan otomatis.
+- 🔄 **Sistem Sirkulasi**: Alur peminjaman dan pengembalian yang mudah dengan notifikasi denda jika terjadi keterlambatan.
+- 📱 **Desain Responsif**: Tampilan yang rapi dan nyaman digunakan melalui Komputer, Tablet, maupun Smartphone.
 
 ---
 
-## 🎛️ Panduan Pengembang (Interaktif)
+## 📈 Alur Sistem (Grafik Interaktif)
 
-Klik pada setiap menu di bawah ini untuk membuka detail instruksi teknis:
+*(Grafik di bawah ini menggunakan Mermaid.js yang akan otomatis ter-render menjadi diagram interaktif di GitHub)*
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Anggota
+    participant Sistem as 💻 Sistem Web
+    actor Pustakawan
+
+    Anggota->>Sistem: Cari Buku di Katalog
+    Sistem-->>Anggota: Tampilkan Hasil (Rak & Ketersediaan)
+    Anggota->>Pustakawan: Serahkan Buku Fisik & Kartu
+    Pustakawan->>Sistem: Scan/Input ID Anggota & Kode Buku
+    Sistem->>Sistem: Validasi Status & Limit Pinjaman
+    
+    alt Validasi Berhasil
+        Sistem-->>Pustakawan: Peminjaman Disetujui
+        Pustakawan-->>Anggota: Serahkan Buku beserta Bukti Pinjam
+    else Validasi Gagal (Denda/Limit)
+        Sistem-->>Pustakawan: Muncul Peringatan Merah!
+        Pustakawan-->>Anggota: Minta Penyelesaian Denda/Kembalikan Buku Lama
+    end
+```
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+| Komponen | Teknologi / Framework |
+| :--- | :--- |
+| **Frontend** | ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) |
+| **Backend** | ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=flat&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=flat&logo=laravel&logoColor=white) |
+| **Database** | ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=flat&logo=mysql&logoColor=white) |
+
+*(Catatan: Silakan ubah badge di atas jika menggunakan teknologi yang berbeda seperti React, CodeIgniter, atau Node.js)*
+
+---
+
+## 🚀 Panduan Instalasi (Local Development)
+
+Berikut adalah panduan interaktif langkah demi langkah untuk menjalankan sistem ini di komputer Anda:
 
 <details>
-<summary><b>🚀 1. Cara Menjalankan Secara Lokal (Offline)</b></summary>
-<br>
+  <summary><b>🛠️ Klik di sini untuk melihat langkah instalasi</b></summary>
+  
+  <br>
 
-Pastikan Anda sudah menginstal Node.js di komputer Anda, lalu buka terminal dan ketik urutan kode berikut:
+  1. **Clone Repositori:**
+     ```bash
+     git clone https://github.com/piajar/perpustakaan-desa-bulaksari.git
+     ```
+  2. **Masuk ke Direktori Proyek:**
+     ```bash
+     cd perpustakaan-desa-bulaksari
+     ```
+  3. **Instal Dependensi (Contoh untuk Laravel):**
+     ```bash
+     composer install
+     npm install && npm run build
+     ```
+  4. **Konfigurasi File Environment:**
+     - Salin `env.example` ke `.env`
+     - Ubah detail `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD`.
+  5. **Jalankan Migrasi Database:**
+     ```bash
+     php artisan migrate --seed
+     ```
+  6. **Mulai Server Lokal:**
+     ```bash
+     php artisan serve
+     ```
+     Buka web browser dan akses: `http://localhost:8000`
 
-1. Unduh pustaka ketergantungan proyek:
-   ```bash
-   npm install
-   ```
-2. Nyalakan server pengembang lokal:
-   ```bash
-   npm run dev
-   ```
-3. Buka browser kesayangan Anda lalu akses alamat:
-   ```text
-   http://localhost:3000
-   ```
 </details>
 
-<details>
-<summary><b>🛠️ 2. Cara Mengaktifkan / Mematikan Mode Maintenance</b></summary>
-<br>
+---
 
-Pengalihan mode maintenance menggunakan sistem sakelar satu baris terpusat:
+## 📸 Cuplikan Layar (Screenshots)
 
-1. Buka berkas `next.config.mjs` di direktori utama proyek.
-2. Cari kode baris `const isMaintenance = true;`.
-3. Ubah nilainya sesuai kebutuhan Anda:
-   - `true` — Mengunci web dan mengalihkan warga ke laman pemeliharaan estetik.
-   - `false` — Membuka gembok keamanan dan mengembalikan fungsi website normal.
-4. Lakukan `git push` untuk menerapkan perubahan secara langsung di cloud.
-</details>
+Berikut adalah antarmuka sistem kami:
 
-<details>
-<summary><b>🤝 3. Alur Berkontribusi Pada Kode</b></summary>
-<br>
+| Halaman Dasbor | Halaman Katalog Buku |
+|:---:|:---:|
+| <img src="https://via.placeholder.com/400x250.png?text=Dashboard+Aplikasi" alt="Dasbor"> | <img src="https://via.placeholder.com/400x250.png?text=Katalog+Buku" alt="Katalog"> |
 
-Kontribusi Anda akan sangat berharga demi memajukan literasi desa! Silakan ikuti aturan kontribusi berikut:
+*(Catatan: Ganti URL gambar placeholder di atas dengan path gambar asli aplikasi Anda yang ada di folder `docs` atau `assets/img`)*
 
-1. Lakukan **Fork** pada repositori ini.
-2. Buat cabang fitur baru Anda (`git checkout -b fitur/FiturKerenSaya`).
-3. Simpan perubahan dengan pesan penjelasan komit (`git commit -m 'feat: tambah fitur pencarian buku'`).
-4. Kirim kode ke cabang Anda (`git push origin fitur/FiturKerenSaya`).
-5. Buat pengajuan penggabungan kode baru via **Pull Request**.
-</details>
+---
+
+## 🤝 Cara Berkontribusi
+
+Kami sangat menyambut baik kontribusi Anda untuk mengembangkan perpustakaan desa ini! 
+- **Bug Reports:** Gunakan fitur *Issues* untuk melaporkan bug.
+- **Pull Requests:** 
+  1. *Fork* proyek ini.
+  2. Buat *branch* fitur Anda (`git checkout -b fitur/NamaFitur-Baru`).
+  3. Lakukan *commit* (`git commit -m 'Menambahkan fitur X'`).
+  4. *Push* ke *branch* (`git push origin fitur/NamaFitur-Baru`).
+  5. Buka *Pull Request*.
 
 ---
 
 ## 📄 Lisensi
-Proyek sistem informasi ini didistribusikan di bawah lisensi terbuka **MIT License** — Lihat berkas `LICENSE` untuk rincian hak aturan pakai kode secara hukum.
+
+Proyek ini menggunakan Lisensi **MIT**. Anda bebas untuk menggunakan, menyalin, dan memodifikasi proyek ini. Lihat file [LICENSE](./LICENSE) untuk detail lebih lanjut.
+
+---
 
 <div align="center">
-  <p>Dibuat dengan 💚 oleh Komunitas Pengembang Desa Bulaksari</p>
+  <sub>Dibuat dengan ❤️ untuk kemajuan literasi <b>Desa Bulaksari</b></sub>
 </div>
