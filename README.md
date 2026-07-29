@@ -60,17 +60,15 @@ sequenceDiagram
 
 | Komponen | Teknologi / Framework |
 | :--- | :--- |
-| **Frontend** | ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) |
-| **Backend** | ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=flat&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=flat&logo=laravel&logoColor=white) |
-| **Database** | ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=flat&logo=mysql&logoColor=white) |
-
-*(Catatan: Silakan ubah badge di atas jika menggunakan teknologi yang berbeda seperti React, CodeIgniter, atau Node.js)*
+| **Frontend & API** | ![Next JS](https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white) |
+| **Database & Auth** | ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=flat&logo=postgresql&logoColor=white) |
+| **Deployment** | ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white) |
 
 ---
 
 ## 🚀 Panduan Instalasi (Local Development)
 
-Berikut adalah panduan interaktif langkah demi langkah untuk menjalankan sistem ini di komputer Anda:
+Berikut adalah panduan langkah demi langkah untuk menjalankan sistem ini di komputer Anda:
 
 <details>
   <summary><b>🛠️ Klik di sini untuk melihat langkah instalasi</b></summary>
@@ -79,29 +77,28 @@ Berikut adalah panduan interaktif langkah demi langkah untuk menjalankan sistem 
 
   1. **Clone Repositori:**
      ```bash
-     git clone https://github.com/piajar/perpustakaan-desa-bulaksari.git
+     git clone https://github.com/USERNAME_KAMU/perpustakaan-desa-bulaksari.git
      ```
   2. **Masuk ke Direktori Proyek:**
      ```bash
      cd perpustakaan-desa-bulaksari
      ```
-  3. **Instal Dependensi (Contoh untuk Laravel):**
+  3. **Instal Dependensi:**
      ```bash
-     composer install
-     npm install && npm run build
+     npm install
      ```
-  4. **Konfigurasi File Environment:**
-     - Salin `env.example` ke `.env`
-     - Ubah detail `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD`.
-  5. **Jalankan Migrasi Database:**
+  4. **Konfigurasi Environment (Jika sudah terhubung Supabase):**
+     - Buat file `.env.local`
+     - Tambahkan API keys dari dashboard Supabase Anda:
+       ```env
+       NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+       NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+       ```
+  5. **Mulai Server Lokal:**
      ```bash
-     php artisan migrate --seed
+     npm run dev
      ```
-  6. **Mulai Server Lokal:**
-     ```bash
-     php artisan serve
-     ```
-     Buka web browser dan akses: `http://localhost:8000`
+     Buka web browser dan akses: `http://localhost:3000`
 
 </details>
 
