@@ -4,14 +4,16 @@ import { dummyBooks } from "@/lib/dummyData";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export function generateMetadata({ params }) {
-  const book = dummyBooks.find(b => b.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const book = dummyBooks.find(b => b.slug === resolvedParams.slug);
   if (!book) return { title: 'Buku Tidak Ditemukan' };
   return { title: `${book.title} - Perpustakaan Desa Bulaksari` };
 }
 
-export default function BookDetail({ params }) {
-  const book = dummyBooks.find(b => b.slug === params.slug);
+export default async function BookDetail({ params }) {
+  const resolvedParams = await params;
+  const book = dummyBooks.find(b => b.slug === resolvedParams.slug);
   
   if (!book) {
     notFound();
