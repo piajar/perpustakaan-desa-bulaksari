@@ -44,7 +44,7 @@ export default function LoginPage() {
           Masuk ke Panel Admin
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
-          Gunakan akun admin@bulaksari.desa.id / admin123
+          Silahkan gunakan akun email yang terdaftar untuk mengakses panel admin. Jika belum memiliki akun, silahkan hubungi administrator.
         </p>
       </div>
 
@@ -71,7 +71,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none block w-full px-4 py-3 border border-slate-200 rounded-xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm bg-white/50"
-                  placeholder="admin@bulaksari.desa.id"
+                  placeholder="youraccount@gmail.com"
                 />
               </div>
             </div>
