@@ -28,7 +28,7 @@ export default function MaintenancePage() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span>Proses Pemeliharaan Sistem</span>
           </div>
-          <p>Kami akan segera kembali. Terima kasih atas kesabaran Anda.</p>
+          <p>Kami akan segera kembali. Terima kasih atas kesabaran Anda. Perpustakaan Desa Bulaksari</p>
         </div>
 
       </div>
