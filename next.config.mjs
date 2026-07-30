@@ -4,7 +4,7 @@
 // TINGGAL UBAH DI SINI:
 // true  = Mode Maintenance MENYALA
 // false = Mode Maintenance MATI (Web Normal)
-const isMaintenance = false; 
+const isMaintenance = true; 
 // ==========================================
 
 const nextConfig = {
