@@ -1,17 +1,23 @@
-import { dummyBooks } from "@/lib/dummyData";
+import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
-export default function KelolaBukuPage() {
-  return (
+export default async function KelolaBukuPage() {
+  const { data: books, error } = await supabase
+    .from('books')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const displayBooks = books || [];
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">Kelola Koleksi Buku</h2>
           <p className="text-slate-500 mt-1">Daftar lengkap semua buku di perpustakaan.</p>
         </div>
-        <button className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+        <Link href="/admin/buku/tambah" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-lg shadow-emerald-600/20 hover:-translate-y-0.5 transition-all flex items-center gap-2">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>
           Tambah Buku
-        </button>
+        </Link>
       </div>
 
       <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
@@ -41,7 +47,7 @@ export default function KelolaBukuPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {dummyBooks.map((book) => (
+              {displayBooks.map((book) => (
                 <tr key={book.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
@@ -75,12 +81,19 @@ export default function KelolaBukuPage() {
                   </td>
                 </tr>
               ))}
+              {displayBooks.length === 0 && (
+                <tr>
+                  <td colSpan="4" className="px-6 py-10 text-center text-slate-500">
+                    Belum ada data buku. Silakan tambah buku.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
         
         <div className="p-6 border-t border-slate-100 flex items-center justify-between">
-          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{dummyBooks.length}</span> buku</p>
+          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{displayBooks.length}</span> buku</p>
           <div className="flex items-center gap-2">
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Sebelumnya</button>
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Selanjutnya</button>

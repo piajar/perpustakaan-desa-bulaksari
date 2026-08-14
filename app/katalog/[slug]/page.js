@@ -1,19 +1,28 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { dummyBooks } from "@/lib/dummyData";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const book = dummyBooks.find(b => b.slug === resolvedParams.slug);
+  const { data: book } = await supabase
+    .from('books')
+    .select('title')
+    .eq('slug', resolvedParams.slug)
+    .single();
+    
   if (!book) return { title: 'Buku Tidak Ditemukan' };
   return { title: `${book.title} - Perpustakaan Desa Bulaksari` };
 }
 
 export default async function BookDetail({ params }) {
   const resolvedParams = await params;
-  const book = dummyBooks.find(b => b.slug === resolvedParams.slug);
+  const { data: book } = await supabase
+    .from('books')
+    .select('*')
+    .eq('slug', resolvedParams.slug)
+    .single();
   
   if (!book) {
     notFound();
@@ -64,7 +73,7 @@ export default async function BookDetail({ params }) {
                 Karya <span className="text-emerald-700 font-bold">{book.author}</span>
               </p>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 mb-8">
                 <div>
                   <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Status</div>
                   <div className={`text-sm font-bold flex items-center gap-1.5 ${book.stock > 0 ? 'text-emerald-600' : 'text-red-600'}`}>
@@ -77,12 +86,20 @@ export default async function BookDetail({ params }) {
                   <div className="text-sm font-bold text-slate-800">{book.stock} Eksemplar</div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Penerbit</div>
-                  <div className="text-sm font-bold text-slate-800">Gramedia (Contoh)</div>
-                </div>
-                <div>
                   <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Tahun</div>
-                  <div className="text-sm font-bold text-slate-800">2023</div>
+                  <div className="text-sm font-bold text-slate-800">{book.tahun_terbit || "-"}</div>
+                </div>
+                <div className="col-span-2 md:col-span-1">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Penerbit</div>
+                  <div className="text-sm font-bold text-slate-800 line-clamp-1" title={book.penerbit}>{book.penerbit || "-"}</div>
+                </div>
+                <div className="col-span-2 md:col-span-1">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">No. Inventaris</div>
+                  <div className="text-sm font-bold text-slate-800 line-clamp-1" title={book.nomor_inventaris}>{book.nomor_inventaris || "-"}</div>
+                </div>
+                <div className="col-span-2 md:col-span-1">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Sumber</div>
+                  <div className="text-sm font-bold text-slate-800 line-clamp-1" title={book.sumber}>{book.sumber || "-"}</div>
                 </div>
               </div>
 

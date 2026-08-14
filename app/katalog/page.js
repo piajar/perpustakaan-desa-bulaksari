@@ -1,14 +1,21 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
-import { dummyBooks } from "@/lib/dummyData";
+import { supabase } from "@/lib/supabase";
 
 export const metadata = {
   title: "Katalog Buku - Perpustakaan Desa Bulaksari",
   description: "Jelajahi berbagai koleksi buku yang tersedia di Perpustakaan Desa Bulaksari.",
 };
 
-export default function Katalog() {
+export default async function Katalog() {
+  const { data: books, error } = await supabase
+    .from('books')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const displayBooks = books || [];
+
   return (
     <>
       <Navbar />
@@ -49,9 +56,16 @@ export default function Katalog() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {dummyBooks.map(book => (
+            {displayBooks.map(book => (
               <BookCard key={book.id} book={book} />
             ))}
+            {displayBooks.length === 0 && (
+              <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-500">
+                <svg className="w-16 h-16 mb-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                <p className="text-lg font-medium">Belum ada buku di katalog.</p>
+                <p className="text-sm">Silakan import data dari Supabase atau tambahkan lewat panel admin.</p>
+              </div>
+            )}
           </div>
 
         </div>

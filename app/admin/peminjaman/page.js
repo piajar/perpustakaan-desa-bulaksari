@@ -1,11 +1,16 @@
-export default function PeminjamanPage() {
-  const dummyPeminjaman = [
-    { id: 1, anggota: "Siti Aminah", buku: "Laskar Pelangi", tglPinjam: "20 Jul 2026", tglKembali: "3 Agu 2026", status: "Dipinjam" },
-    { id: 2, anggota: "Budi Santoso", buku: "Bumi Manusia", tglPinjam: "15 Jul 2026", tglKembali: "29 Jul 2026", status: "Terlambat" },
-    { id: 3, anggota: "Dewi Lestari", buku: "Filosofi Teras", tglPinjam: "10 Jul 2026", tglKembali: "24 Jul 2026", status: "Dikembalikan" },
-    { id: 4, anggota: "Rina Wati", buku: "Atomic Habits", tglPinjam: "22 Jul 2026", tglKembali: "5 Agu 2026", status: "Dipinjam" },
-    { id: 5, anggota: "Hendra Wijaya", buku: "Si Kancil dan Buaya", tglPinjam: "5 Jul 2026", tglKembali: "19 Jul 2026", status: "Dikembalikan" },
-  ];
+import { supabase } from "@/lib/supabase";
+
+export default async function PeminjamanPage() {
+  const { data: borrowings, error } = await supabase
+    .from('borrowings')
+    .select(`
+      *,
+      members (nama),
+      books (title)
+    `)
+    .order('created_at', { ascending: false });
+
+  const displayPeminjaman = borrowings || [];
 
   const getStatusStyle = (status) => {
     switch (status) {
@@ -91,19 +96,22 @@ export default function PeminjamanPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {dummyPeminjaman.map((p) => (
+              {displayPeminjaman.map((p) => {
+                const anggotaNama = p.members?.nama || "Unknown";
+                const bukuTitle = p.books?.title || "Unknown";
+                return (
                 <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm shrink-0">
-                        {p.anggota.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                        {anggotaNama.split(" ").map(n => n[0]).join("").slice(0, 2)}
                       </div>
-                      <span className="font-bold text-slate-800">{p.anggota}</span>
+                      <span className="font-bold text-slate-800">{anggotaNama}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-slate-700 font-medium">{p.buku}</td>
-                  <td className="px-6 py-4 text-slate-600 text-sm">{p.tglPinjam}</td>
-                  <td className="px-6 py-4 text-slate-600 text-sm">{p.tglKembali}</td>
+                  <td className="px-6 py-4 text-slate-700 font-medium">{bukuTitle}</td>
+                  <td className="px-6 py-4 text-slate-600 text-sm">{new Date(p.tgl_pinjam).toLocaleDateString('id-ID')}</td>
+                  <td className="px-6 py-4 text-slate-600 text-sm">{new Date(p.tgl_kembali).toLocaleDateString('id-ID')}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${getStatusStyle(p.status)}`}>
                       {p.status}
@@ -122,13 +130,20 @@ export default function PeminjamanPage() {
                     )}
                   </td>
                 </tr>
-              ))}
+              )})}
+              {displayPeminjaman.length === 0 && (
+                <tr>
+                  <td colSpan="6" className="px-6 py-10 text-center text-slate-500">
+                    Belum ada riwayat peminjaman.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
 
         <div className="p-6 border-t border-slate-100 flex items-center justify-between">
-          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{dummyPeminjaman.length}</span> transaksi</p>
+          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{displayPeminjaman.length}</span> transaksi</p>
           <div className="flex items-center gap-2">
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Sebelumnya</button>
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Selanjutnya</button>

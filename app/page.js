@@ -1,10 +1,17 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
-import { dummyBooks } from "@/lib/dummyData";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const { data: latestBooks, error } = await supabase
+    .from('books')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(4);
+
+  const displayBooks = latestBooks || [];
   return (
     <>
       <Navbar />
@@ -132,9 +139,14 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {dummyBooks.map(book => (
+              {displayBooks.map(book => (
                 <BookCard key={book.id} book={book} />
               ))}
+              {displayBooks.length === 0 && (
+                <div className="col-span-full py-10 text-center text-slate-500">
+                  Belum ada buku terbaru.
+                </div>
+              )}
             </div>
           </div>
         </section>

@@ -1,12 +1,12 @@
-export default function AnggotaPage() {
-  const dummyAnggota = [
-    { id: 1, nama: "Siti Aminah", nik: "3328XXXX0001", alamat: "RT 01/RW 02 Bulaksari", tglDaftar: "12 Jan 2025", status: "Aktif" },
-    { id: 2, nama: "Budi Santoso", nik: "3328XXXX0002", alamat: "RT 03/RW 01 Bulaksari", tglDaftar: "5 Feb 2025", status: "Aktif" },
-    { id: 3, nama: "Dewi Lestari", nik: "3328XXXX0003", alamat: "RT 02/RW 03 Bulaksari", tglDaftar: "20 Mar 2025", status: "Aktif" },
-    { id: 4, nama: "Ahmad Fauzi", nik: "3328XXXX0004", alamat: "RT 04/RW 02 Bulaksari", tglDaftar: "8 Apr 2025", status: "Nonaktif" },
-    { id: 5, nama: "Rina Wati", nik: "3328XXXX0005", alamat: "RT 01/RW 04 Bulaksari", tglDaftar: "15 Mei 2025", status: "Aktif" },
-    { id: 6, nama: "Hendra Wijaya", nik: "3328XXXX0006", alamat: "RT 05/RW 01 Bulaksari", tglDaftar: "1 Jun 2025", status: "Aktif" },
-  ];
+import { supabase } from "@/lib/supabase";
+
+export default async function AnggotaPage() {
+  const { data: members, error } = await supabase
+    .from('members')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  const displayAnggota = members || [];
 
   return (
     <div>
@@ -42,7 +42,7 @@ export default function AnggotaPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {dummyAnggota.map((a) => (
+              {displayAnggota.map((a) => (
                 <tr key={a.id} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
@@ -54,7 +54,7 @@ export default function AnggotaPage() {
                   </td>
                   <td className="px-6 py-4 text-slate-600 font-mono text-sm">{a.nik}</td>
                   <td className="px-6 py-4 text-slate-600 text-sm">{a.alamat}</td>
-                  <td className="px-6 py-4 text-slate-600 text-sm">{a.tglDaftar}</td>
+                  <td className="px-6 py-4 text-slate-600 text-sm">{new Date(a.created_at).toLocaleDateString('id-ID')}</td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${a.status === 'Aktif' ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-500'}`}>
                       {a.status}
@@ -70,12 +70,19 @@ export default function AnggotaPage() {
                   </td>
                 </tr>
               ))}
+              {displayAnggota.length === 0 && (
+                <tr>
+                  <td colSpan="6" className="px-6 py-10 text-center text-slate-500">
+                    Belum ada data anggota.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
 
         <div className="p-6 border-t border-slate-100 flex items-center justify-between">
-          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{dummyAnggota.length}</span> anggota</p>
+          <p className="text-sm text-slate-500">Menampilkan <span className="font-bold text-slate-700">{displayAnggota.length}</span> anggota</p>
           <div className="flex items-center gap-2">
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Sebelumnya</button>
             <button className="px-3 py-1.5 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Selanjutnya</button>
