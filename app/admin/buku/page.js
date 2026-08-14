@@ -8,6 +8,7 @@ export default async function KelolaBukuPage() {
     .order('created_at', { ascending: false });
 
   const displayBooks = books || [];
+  return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
